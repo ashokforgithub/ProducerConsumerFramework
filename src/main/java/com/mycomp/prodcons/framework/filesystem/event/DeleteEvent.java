@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycomp.prodcons.framework.filesystem;
+package com.mycomp.prodcons.framework.filesystem.event;
 
 import com.mycomp.prodcons.framework.event.ActionEvent;
 
@@ -9,12 +9,12 @@ import com.mycomp.prodcons.framework.event.ActionEvent;
  * @author Ashok
  *
  */
-public class UpdateEvent implements ActionEvent {
+public class DeleteEvent implements ActionEvent {
 
 	/**
 	 * 
 	 */
-	public UpdateEvent() {
+	public DeleteEvent() {
 		// TODO Auto-generated constructor stub
 	}
 

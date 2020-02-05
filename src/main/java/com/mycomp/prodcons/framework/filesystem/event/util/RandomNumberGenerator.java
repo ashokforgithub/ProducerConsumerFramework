@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycomp.prodcons.framework.filesystem.util;
+package com.mycomp.prodcons.framework.filesystem.event.util;
 
 import java.util.Random;
 
