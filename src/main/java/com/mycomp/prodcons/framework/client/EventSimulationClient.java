@@ -14,7 +14,8 @@ import com.mycomp.prodcons.framework.event.util.EventUtils;
 
 /**
  * @author ashok
- *
+ * 
+ * A Simulator Class to Test Event Driven Approach.
  */
 public class EventSimulationClient {
 
