@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycomp.prodcons.framework.filesystem;
+package com.mycomp.prodcons.framework.filesystem.event;
 
 import com.mycomp.prodcons.framework.event.ActionEvent;
 
