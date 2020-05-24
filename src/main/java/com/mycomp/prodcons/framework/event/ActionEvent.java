@@ -6,7 +6,7 @@ package com.mycomp.prodcons.framework.event;
 import java.io.Serializable;
 
 /**
- * @author Ashok
+ * @author ashok
  *
  */
 public interface ActionEvent extends Serializable {
@@ -16,6 +16,5 @@ public interface ActionEvent extends Serializable {
 	public void undo();
 	
 	public Object getState();
-	
 
 }

@@ -10,75 +10,71 @@ import java.util.concurrent.locks.ReentrantLock;
 import com.mycomp.prodcons.framework.event.ActionEvent;
 
 /**
- * @author Ashok
+ * @author ashok
  *
  */
 public class EventStore {
 	
-	private static ReentrantLock lock = new ReentrantLock();
+	private static EventStore eventStore;
 	
-	private static EventStore eventStore;	
+	private BlockingQueue< ActionEvent> inputQ = new LinkedBlockingQueue<ActionEvent>();
 	
-	private BlockingQueue<ActionEvent> inputQueue= new LinkedBlockingQueue<>();
+	private static ReentrantLock startLock = new ReentrantLock(true);
 	
-
-	/**
-	 *  Hidding Constructor
-	 */
-	private EventStore() {
-		// TODO Auto-generated constructor stub
+	//Hiding Constructor
+	private EventStore()
+	{
+		
 	}
-
 	
-	/**
-	 * @return
-	 */
-	public static EventStore getStore()
+	public static EventStore getInstance()
 	{
 		try {
-			lock.lock();
-			if (null == eventStore) {				
-				eventStore = new EventStore();				
-			} 
-			lock.unlock();
-		} finally {
-			// TODO: handle finally clause
+			startLock.lock();
 			
-			if(lock.isLocked()) lock.unlock();
+			if(null == eventStore)
+			{
+				eventStore =  new EventStore();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			if(startLock.isLocked())
+				startLock.unlock();
 		}
 		
 		return eventStore;
+	}
+	
+	
+	public void putInQueue(ActionEvent actionEvent)
+	{
+		try {
+			
+			inputQ.put(actionEvent);
+			System.out.println(actionEvent+ " put in Queue");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}	
 		
 	}
 	
-	/**
-	 * @param actionEvent
-	 */
-	public void putInQueue(ActionEvent actionEvent) {
+	public ActionEvent getFromQueue()
+	{
+		ActionEvent actionEvent = null;
 		
 		try {
-			this.inputQueue.put(actionEvent);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			actionEvent = inputQ.take();
+			System.out.println(actionEvent+ " taken from Queue");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
-	}
-	
-	/**
-	 * @return
-	 */
-	public ActionEvent getFromQueue() {
-		ActionEvent actionEvent=null;
-
-		try {
-			actionEvent= this.inputQueue.take();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return  actionEvent;
 	}
-	
 
 }
